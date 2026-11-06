@@ -9,10 +9,10 @@ export default defineConfig({
   resolve: {
     alias: {
       // folder convex/ ada di root repo, di luar web/
-      "@convex": fileURLToPath(new URL("../convex", import.meta.url)),
+      "@convex": fileURLToPath(new URL("../../convex", import.meta.url)),
     },
   },
   server: {
-    fs: { allow: [".."] }, // izinkan Vite membaca ../convex
+    fs: { allow: ["../.."] }, // izinkan Vite membaca ../convex
   },
 });
