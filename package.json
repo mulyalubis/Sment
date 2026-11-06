@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@convex-dev/auth": "^0.0.96",
+    "convex": "^1.49.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "~5.9.3"
+  }
+}

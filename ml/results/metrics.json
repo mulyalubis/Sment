@@ -1,0 +1,44 @@
+{
+  "test_accuracy": 0.9629629629629629,
+  "classes": [
+    "Organic Waste",
+    "Paper Waste",
+    "Plastic Waste"
+  ],
+  "images_per_split": {
+    "train/organic": 210,
+    "val/organic": 45,
+    "test/organic": 45,
+    "train/plastic": 210,
+    "val/plastic": 45,
+    "test/plastic": 45,
+    "train/paper": 210,
+    "val/paper": 45,
+    "test/paper": 45
+  },
+  "total_images": 900,
+  "model": "MobileNetV2 (transfer learning + fine-tuning)",
+  "input_size": [
+    224,
+    224
+  ],
+  "tensorflow_version": "2.21.0",
+  "trained_at": "2026-11-03T08:32:39",
+  "per_class": {
+    "Organic Waste": {
+      "precision": 1.0,
+      "recall": 0.9778,
+      "f1-score": 0.9888
+    },
+    "Paper Waste": {
+      "precision": 0.9167,
+      "recall": 0.9778,
+      "f1-score": 0.9462
+    },
+    "Plastic Waste": {
+      "precision": 0.9767,
+      "recall": 0.9333,
+      "f1-score": 0.9545
+    }
+  }
+}

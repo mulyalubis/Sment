@@ -1,0 +1,11 @@
+Test accuracy: 0.9630
+
+               precision    recall  f1-score   support
+
+Organic Waste     1.0000    0.9778    0.9888        45
+  Paper Waste     0.9167    0.9778    0.9462        45
+Plastic Waste     0.9767    0.9333    0.9545        45
+
+     accuracy                         0.9630       135
+    macro avg     0.9645    0.9630    0.9632       135
+ weighted avg     0.9645    0.9630    0.9632       135

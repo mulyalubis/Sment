@@ -1,0 +1,8 @@
+# GANTI versi tensorflow dengan versi yang tercetak di Colab (tf.__version__),
+# supaya model.keras bisa dimuat tanpa masalah kompatibilitas.
+tensorflow>=2.21.0
+fastapi
+uvicorn[standard]
+python-multipart
+pillow
+numpy
