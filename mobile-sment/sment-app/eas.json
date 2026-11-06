@@ -1,0 +1,17 @@
+{
+  "cli": {
+    "version": ">= 5.0.0"
+  },
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_CONVEX_URL": "https://third-gecko-841.convex.cloud",
+        "EXPO_PUBLIC_ML_API_URL": "https://sementara.example.com"
+      }
+    }
+  }
+}
