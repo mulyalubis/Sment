@@ -1,75 +1,85 @@
-# React + TypeScript + Vite
+# Sment Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sment Web is the browser-based interface for the Sment smart waste-management project. It is built with React, TypeScript, Vite, React Router, Tailwind CSS v4, Recharts, and Convex.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js (LTS recommended)
+- npm
+- A configured Convex deployment for features that require backend data/authentication
 
-## React Compiler
+## Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+From the repository root:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+cd web-sment/sment-web
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Environment Configuration
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The web client needs to connect to the Convex deployment. Check the Convex client initialization in the source code and use the environment variable name expected there.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Create a local `.env.local` file if the source configuration expects Vite environment variables. Example placeholder (replace with the exact variable name used by the app):
 
+```env
+VITE_CONVEX_URL=https://<your-deployment>.convex.cloud
 ```
+
+Do not commit `.env.local`, access tokens, or secret values. Vite only exposes variables with the `VITE_` prefix to client-side code; never place secrets in client variables.
+
+## Run in Development
+
+```bash
+npm run dev
+```
+
+Vite prints the local development URL in the terminal (usually http://localhost:5173).
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Run TypeScript project build and create production assets |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+
+## Production Build
+
+```bash
+npm run build
+npm run preview
+```
+
+The production bundle is generated in the `dist/` directory.
+
+## Deployment (Vercel)
+
+The project contains a `vercel.json` configuration.
+
+1. Import the repository into Vercel.
+2. Set the **Root Directory** to `web-sment/sment-web`.
+3. Set the required client environment variable(s) in the Vercel project settings, using the exact names expected by the source code.
+4. Use `npm install` as the install command and `npm run build` as the build command.
+5. Deploy the project.
+
+If deploying from a monorepo, confirm that the selected root directory is the web app directory.
+
+## Tech Stack
+
+- React 19
+- TypeScript
+- Vite
+- React Router
+- Tailwind CSS v4
+- Recharts
+- Convex / Convex Auth
+
+## Related Documentation
+
+- [Main Sment repository](../../README.md)
+- [Sment Mobile App](../../mobile-sment/sment-app/README.md)
+- [Convex backend](../../convex/)
+- [Machine Learning API](../../ml/README.md)
