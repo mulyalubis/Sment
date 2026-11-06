@@ -1,56 +1,117 @@
-# Welcome to your Expo app 👋
+# Sment App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Sment App is the mobile client of Sment, developed with React Native, Expo, Expo Router, and TypeScript. The app configuration includes image picker and location permissions for waste-photo capture and location features.
 
-## Get started
+## Requirements
 
-1. Install dependencies
+- Node.js (LTS recommended) and npm
+- Android Studio with Android SDK for Android emulator/local native builds, or a physical Android device
+- Expo tooling (used through `npx`)
+- A configured Convex backend
+- ML API endpoint accessible from the device for image classification
 
-   ```bash
-   npm install
-   ```
+For iOS native builds, a macOS environment with Xcode is required. See the [Expo environment setup guide](https://docs.expo.dev/get-started/set-up-your-environment/).
 
-2. Start the app
+## Installation
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+From the repository root:
 
 ```bash
-npm run reset-project
+cd mobile-sment/sment-app
+npm install
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Environment Configuration
 
-### Other setup steps
+Configure the client URLs according to the variable names read in the app's source code. The EAS preview profile currently declares `EXPO_PUBLIC_CONVEX_URL` and `EXPO_PUBLIC_ML_API_URL`.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Create a local `.env` file:
 
-## Learn more
+```env
+EXPO_PUBLIC_CONVEX_URL=https://<your-deployment>.convex.cloud
+EXPO_PUBLIC_ML_API_URL=https://<your-ml-api-host>
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Replace the placeholders with your own service endpoints. For local testing on a physical phone, use your computer's LAN IP or a secure tunnel for the ML API; `localhost` refers to the phone itself. Do not store secret keys in `EXPO_PUBLIC_*` variables because they are bundled into the client.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Start the Development Server
 
-## Join the community
+```bash
+npx expo start
+``
 
-Join our community of developers creating universal apps.
+Then select the appropriate target:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Press `a` to open Android (with a configured emulator).
+- Scan the QR code using a compatible Expo development client.
+- Press `w` to run the web target if supported by the app.
+
+## Android Local Development Build
+
+With Android Studio and SDK configured:
+
+```bash
+npm run android
+``
+
+This runs Expo's Android native build command. A device/emulator should be connected and ready.
+
+## Lint
+
+```bash
+npm run lint
+``
+
+## Build an APK with EAS
+
+The repository includes an EAS configuration with a `preview` profile set for internal distribution and Android APK output.
+
+1. Sign in to Expo:
+
+   ```bash
+   npx eas login
+   ```
+
+2. Install/use EAS CLI:
+
+   ```bash
+   npm install --global eas-cli
+   ```
+
+3. Start the preview APK build:
+
+   ```bash
+   eas build --platform android --profile preview
+   ```
+
+4. When the build completes, download the APK from the build page and install it on a compatible Android device.
+
+Review `eas.json` and configure its environment values with the correct backend/API URLs before creating the build.
+
+## Permissions
+
+The Expo app configuration requests permissions for:
+
+- Camera/image picker (capturing waste images)
+- Location access (location-related app functionality)
+
+Users must grant these permissions when prompted for the corresponding features.
+
+## Tech Stack
+
+- React Native
+- Expo SDK 58
+- Expo Router
+- TypeScript
+- Convex / Convex Auth
+- Expo Image Picker
+- Expo Location
+- Expo Secure Store
+
+## Related Documentation
+
+- [Main Sment repository](../../README.md)
+- [Sment Web](../../web-sment/sment-web/README.md)
+- [Convex backend](../../convex/)
+- [Machine Learning API](../../ml/README.md)
+- [Expo documentation](https://docs.expo.dev/)
